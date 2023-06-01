@@ -10,7 +10,7 @@ namespace xo
     {
         public static string x= "x";
         public static string o = "o";
-        /*public static bool MyArrayIsntFull(string[] myArray)
+        public static bool MyArrayIsntFull(string[] myArray)
         {
             for (int i = 0; i < myArray.Length; i++)
             {
@@ -18,9 +18,9 @@ namespace xo
                 {
                     return true;
                 }
-            } 
+            }
             return false;
-        }*/
+        }
         public static bool MyArrayIsntNull(string[] myArray)
         {
             for (int i = 0; i < myArray.Length; i++)
@@ -41,9 +41,9 @@ namespace xo
             Random rnd = new Random();
              
             do
-            {  
+            {
                 //printing the array 
-                    for (int i = 0; i < myArray.Length; i++)
+                for (int i = 0; i < myArray.Length; i++)
                     { 
                             Console.Write($" [  {myArray[i]}  ] ");
                         if (i == 2 || i == 5 || i == 8)
@@ -69,7 +69,7 @@ namespace xo
                 Console.ReadLine();
                 Console.Clear(); 
                  
-            } while ( );               
+            } while ( MyArrayIsntFull(myArray));               
         }
         
     }

@@ -9,7 +9,18 @@ namespace xo
     internal class Program
     {
         public static string x= "x";
-        public static string o = "o"; 
+        public static string o = "o";
+        /*public static bool MyArrayIsntFull(string[] myArray)
+        {
+            for (int i = 0; i < myArray.Length; i++)
+            {
+                if (myArray[i] == null)
+                {
+                    return true;
+                }
+            } 
+            return false;
+        }*/
         public static bool MyArrayIsntNull(string[] myArray)
         {
             for (int i = 0; i < myArray.Length; i++)
@@ -30,8 +41,7 @@ namespace xo
             Random rnd = new Random();
              
             do
-            {
-                
+            {  
                 //printing the array 
                     for (int i = 0; i < myArray.Length; i++)
                     { 
@@ -59,7 +69,7 @@ namespace xo
                 Console.ReadLine();
                 Console.Clear(); 
                  
-            } while (MyArrayIsntNull(myArray));               
+            } while ( );               
         }
         
     }

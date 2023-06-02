@@ -39,9 +39,10 @@ namespace xo
             int input;
             string[] myArray = new string[9];
             Random rnd = new Random();
-             
+            bool isnotnull = MyArrayIsntNull(myArray);
             do
             {
+                 
                 //printing the array 
                 for (int i = 0; i < myArray.Length; i++)
                     { 
@@ -50,8 +51,18 @@ namespace xo
                             Console.WriteLine();
                     }
                 input = int.Parse(Console.ReadLine());
-
+                if (!isnotnull)
+                {
                     for (int i = 0; i < myArray.Length; i++)
+                    {
+                        Console.Write($" [  {myArray[i]}  ] ");
+                        if (i == 2 || i == 5 || i == 8)
+                            Console.WriteLine();
+                    }
+                    Console.Clear();
+                }
+                Console.Clear();
+                for (int i = 0; i < myArray.Length; i++)
                     {
                         if (input == i)
                         {
@@ -62,11 +73,10 @@ namespace xo
                             Console.Write($" [  {myArray[i]}  ] ");
                         if (i == 2 || i == 5 || i == 8)
                             Console.WriteLine();
-                    }
-
+                    } 
 
                  
-                Console.ReadLine();
+                 
                 Console.Clear(); 
                  
             } while ( MyArrayIsntFull(myArray));               

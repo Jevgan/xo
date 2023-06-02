@@ -69,9 +69,7 @@ namespace xo
                             Console.Write($" [  {myArray[i]}  ] ");
                         if (i == 2 || i == 5 || i == 8)
                             Console.WriteLine();
-                    } 
-
-                 
+                    }  
                  
                 Console.Clear(); 
                  

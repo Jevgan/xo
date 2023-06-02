@@ -29,11 +29,9 @@ namespace xo
                 {
                     return true;
                 }
-            }
-            Console.WriteLine(  "U win");
+            } 
             return false;
-        }
-        
+        } 
         static void Main( )
         { 
             int input;
@@ -41,8 +39,7 @@ namespace xo
             Random rnd = new Random();
             bool isnotnull = MyArrayIsntNull(myArray);
             do
-            {
-                 
+            { 
                 //printing the array 
                 for (int i = 0; i < myArray.Length; i++)
                     { 
@@ -58,8 +55,7 @@ namespace xo
                         Console.Write($" [  {myArray[i]}  ] ");
                         if (i == 2 || i == 5 || i == 8)
                             Console.WriteLine();
-                    }
-                    Console.Clear();
+                    } 
                 }
                 Console.Clear();
                 for (int i = 0; i < myArray.Length; i++)

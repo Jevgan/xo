@@ -8,70 +8,65 @@ namespace xo
 {
     internal class Program
     {
-        public static string x= "x";
-        public static string o = "o";
-        public static bool MyArrayIsntFull(string[] myArray)
+        private static char x= 'x';
+        private static char o = 'o';
+        //
+        public static bool MyArrayIsntFull(char[] arr)
         {
-            for (int i = 0; i < myArray.Length; i++)
+            for (int i = 0; i < arr.Length; i++)
             {
-                if (myArray[i] == null)
+                if (arr[i] == null)
                 {
                     return true;
                 }
             }
             return false;
         }
-        public static bool MyArrayIsntNull(string[] myArray)
+        public static bool MyArrayIsntNull(char[] arr)
         {
-            for (int i = 0; i < myArray.Length; i++)
+            for (int i = 0; i < arr.Length; i++)
             {
-                if (myArray[i] != null)
+                if (arr[i] != null)
                 {
                     return true;
                 }
             } 
             return false;
-        } 
+        }
+        //
+        public static void ShowMap(char[] arr)
+        {
+            Console.Write($"[{arr[0]}][{arr[1]}][{arr[2]}]\n[{arr[3]}][{arr[4]}][{arr[5]}]\n[{arr[6]}][{arr[7]}][{arr[8]}]");
+        }
         static void Main( )
         { 
             int input;
-            string[] myArray = new string[9];
+            char[] myArray = new char[9];
             Random rnd = new Random();
+
+            int random=rnd.Next(8);
+
             bool isnotnull = MyArrayIsntNull(myArray);
             do
-            { 
-                //printing the array 
-                for (int i = 0; i < myArray.Length; i++)
-                    { 
-                            Console.Write($" [  {myArray[i]}  ] ");
-                        if (i == 2 || i == 5 || i == 8)
-                            Console.WriteLine();
-                    }
+            {    
+                Console.Clear();
+                //print on array
+                ShowMap(myArray);
                 input = int.Parse(Console.ReadLine());
-                if (!isnotnull)
+                //appropriation the value that inputing in showmap:)))
+                for (int i = 0; i < myArray.Length; i++)
                 {
-                    for (int i = 0; i < myArray.Length; i++)
+                    if (input==i)
                     {
-                        Console.Write($" [  {myArray[i]}  ] ");
-                        if (i == 2 || i == 5 || i == 8)
-                            Console.WriteLine();
+                        myArray[i] =x;
+                    }
+                    else
+                    {
+                        myArray[random] = o;
                     } 
                 }
-                Console.Clear();
-                for (int i = 0; i < myArray.Length; i++)
-                    {
-                        if (input == i)
-                        {
-                            myArray[i] = x;
-                            Console.Write($" [  {myArray[i]}  ] ");
-                        }
-                        else
-                            Console.Write($" [  {myArray[i]}  ] ");
-                        if (i == 2 || i == 5 || i == 8)
-                            Console.WriteLine();
-                    }  
-                 
                 Console.Clear(); 
+
                  
             } while ( MyArrayIsntFull(myArray));               
         }

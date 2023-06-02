@@ -15,7 +15,7 @@ namespace xo
         {
             for (int i = 0; i < arr.Length; i++)
             {
-                if (arr[i] == null)
+                if (arr[i] == 0)
                 {
                     return true;
                 }
@@ -52,19 +52,16 @@ namespace xo
                 Console.Clear();
                 //print on array
                 ShowMap(myArray);
+                Repeat:
                 input = int.Parse(Console.ReadLine());
                 //appropriation the value that inputing in showmap:)))
-                for (int i = 0; i < myArray.Length; i++)
-                {
-                    if (input==i)
-                    {
-                        myArray[i] =x;
-                    }
-                    else
-                    {
-                        myArray[random] = o;
-                    } 
-                }
+                 
+              int indexinp= Array. BinarySearch(myArray, input);
+                    if (input==indexinp) 
+                        myArray[input] =x; 
+                    else  
+                         goto Repeat ;
+                 
                 Console.Clear(); 
 
                  

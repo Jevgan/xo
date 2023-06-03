@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace xo
 {
@@ -11,22 +8,22 @@ namespace xo
         private static char x= 'x';
         private static char o = 'o';
         //
-        public static bool MyArrayIsntFull(char[] arr)
+        public static bool mapIsFull(char[] arr)
         {
             for (int i = 0; i < arr.Length; i++)
             {
-                if (arr[i] == 0)
+                if ( arr[i]=='\0' /*arr[i] !=x & arr[i] != o*/)
                 {
-                    return true;
+                    return false;
                 }
             }
-            return false;
+            return true;
         }
-        public static bool MyArrayIsntNull(char[] arr)
+        public static bool mapIsntNull(char[] arr)
         {
             for (int i = 0; i < arr.Length; i++)
             {
-                if (arr[i] != null)
+                if (arr[i] != 0)
                 {
                     return true;
                 }
@@ -34,38 +31,57 @@ namespace xo
             return false;
         }
         //
+         
         public static void ShowMap(char[] arr)
         {
             Console.Write($"[{arr[0]}][{arr[1]}][{arr[2]}]\n[{arr[3]}][{arr[4]}][{arr[5]}]\n[{arr[6]}][{arr[7]}][{arr[8]}]");
         }
-        static void Main( )
-        { 
-            int input;
-            char[] myArray = new char[9];
+        static void Main()
+        {  
+            char[] map = new char[9];
             Random rnd = new Random();
-
-            int random=rnd.Next(8);
-
-            bool isnotnull = MyArrayIsntNull(myArray);
+            bool isfull = mapIsFull(map);
+            //the loop for the repeating the movenent by user
             do
             {    
                 Console.Clear();
                 //print on array
-                ShowMap(myArray);
-                Repeat:
-                input = int.Parse(Console.ReadLine());
-                //appropriation the value that inputing in showmap:)))
+                if (!isfull)
+                {
+                   ShowMap(map);
+                }
                  
-              int indexinp= Array. BinarySearch(myArray, input);
-                    if (input==indexinp) 
-                        myArray[input] =x; 
-                    else  
-                         goto Repeat ;
-                 
-                Console.Clear(); 
-
-                 
-            } while ( MyArrayIsntFull(myArray));               
+             Repeat: 
+                //appropriation the 'x' in the map 
+                Console.WriteLine("\nInput the digit : ");
+                if (!isfull&int.TryParse(Console.ReadLine(),out int input))
+                {
+                    map[input] = x;
+                    Console.Clear() ;
+                    ShowMap(map);
+                }
+                else   
+                {
+                    Console.WriteLine("it must be an digit!!!");
+                    goto Repeat;
+                }
+                //appropriation value that will be the index of 'o'
+                Repeat1:
+                int random = rnd.Next(9);
+                    if ( !isfull&map[random] != x& map[random] != o)
+                    {
+                        map[random] = o;
+                    }
+                    else
+                    {
+                        goto Repeat1;
+                    } 
+                if (isfull)
+                {
+                    Console.WriteLine("Tie");
+                } 
+                Console.Clear();  
+            } while (!isfull);               
         }
         
     }

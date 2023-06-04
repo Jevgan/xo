@@ -12,26 +12,13 @@ namespace xo
         {
             for (int i = 0; i < arr.Length; i++)
             {
-                if ( arr[i]=='\0' /*arr[i] !=x & arr[i] != o*/)
+                if ( arr[i]=='\0'  &arr[i] !=x & arr[i] != o )
                 {
                     return false;
                 }
             }
             return true;
-        }
-        public static bool mapIsntNull(char[] arr)
-        {
-            for (int i = 0; i < arr.Length; i++)
-            {
-                if (arr[i] != 0)
-                {
-                    return true;
-                }
-            } 
-            return false;
-        }
-        //
-         
+        } 
         public static void ShowMap(char[] arr)
         {
             Console.Write($"[{arr[0]}][{arr[1]}][{arr[2]}]\n[{arr[3]}][{arr[4]}][{arr[5]}]\n[{arr[6]}][{arr[7]}][{arr[8]}]");
@@ -51,7 +38,7 @@ namespace xo
                    ShowMap(map);
                 }
                  
-             Repeat: 
+             ReInput: 
                 //appropriation the 'x' in the map 
                 Console.WriteLine("\nInput the digit : ");
                 if (!isfull&int.TryParse(Console.ReadLine(),out int input))
@@ -63,26 +50,24 @@ namespace xo
                 else   
                 {
                     Console.WriteLine("it must be an digit!!!");
-                    goto Repeat;
-                }
+                    goto ReInput;
+                } 
+                 ReRandom:
+                
                 //appropriation value that will be the index of 'o'
-                Repeat1:
-                int random = rnd.Next(9);
-                    if ( !isfull&map[random] != x& map[random] != o)
+                int random = rnd.Next(9); 
+                if (   map[random] != x& map[random] != o)
                     {
                         map[random] = o;
                     }
-                    else
+                    else if(!mapIsFull(map)) 
                     {
-                        goto Repeat1;
-                    } 
-                if (isfull)
-                {
-                    Console.WriteLine("Tie");
-                } 
+                        goto ReRandom;
+                    }  
                 Console.Clear();  
-            } while (!isfull);               
-        }
-        
-    }
+            } while (!mapIsFull(map));
+             
+        } 
+     
+}
 }

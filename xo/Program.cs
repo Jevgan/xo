@@ -108,7 +108,7 @@ namespace xo
             do
             {    
                 Console.Clear();
-                //print on array
+                //Print on array
                 if (!isfull)
                 {
                    PrintMap(map);

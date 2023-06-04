@@ -7,7 +7,7 @@ namespace xo
     {
         private static char x= 'x';
         private static char o = 'o';
-        //
+         
         public static bool mapIsFull(char[] arr)
         {
             for (int i = 0; i < arr.Length; i++)
@@ -18,11 +18,7 @@ namespace xo
                 }
             }
             return true;
-        }
-        /* public static void ShowMap(char[] arr)
-         {
-             Console.Write($"[{arr[0]}][{arr[1]}][{arr[2]}]\n[{arr[3]}][{arr[4]}][{arr[5]}]\n[{arr[6]}][{arr[7]}][{arr[8]}]");
-         }*/
+        } 
         static void PrintMap(char[]map)
         {
             Console.WriteLine("-------------");
@@ -136,17 +132,16 @@ namespace xo
                 
                 //appropriation value that will be the index of 'o'
                 int random = rnd.Next(9); 
-                if (   map[random] != x& map[random] != o)
+                    if (   map[random] != x& map[random] != o)
                     {
                         map[random] = o;
                     }
                     else if(!mapIsFull(map)) 
                     {
                         goto ReRandom;
-                    }  
-                 
+                    }   
                 Console.Clear();
-                //Determining a win or lose
+                //Determining end of game
                 if (IsWin(map))
                 {
                     Console.WriteLine("Win !!!\n");

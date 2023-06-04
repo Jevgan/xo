@@ -33,8 +33,7 @@ namespace xo
             }
         }
         public static bool IsWin(char[] map)
-        {
-
+        { 
             // Check rows
             for (int i = 0; i < 9; i += 3)
             {
@@ -47,19 +46,19 @@ namespace xo
             // Check columns
             for (int i = 0; i < 3; i++)
             {
-                if (map[i] == x && map[i] != '-' && map[i] == map[i + 3] && map[i + 3] == map[i + 6] && map[i] == x && map[i+3] == x && map[i+6] == x)
+                if (map[i] == x  && map[i] == map[i + 3] && map[i + 3] == map[i + 6] && map[i+3] == x && map[i+6] == x)
                 {
                     return true;
                 }
             }
 
             // Check diagonals
-            if (map[0] != '-' && map[0] == map[4] && map[4] == map[8] && map[0]==x && map[4] == x && map[8] == x)
+            if (map[0] == map[4] && map[4] == map[8] && map[0]==x && map[4] == x && map[8] == x)
             {
                 return true;
             }
 
-            if (map[2] != '-' && map[2] == map[4] && map[4] == map[6] && map[2] == x && map[4] == x && map[6] == x)
+            if (map[2] == map[4] && map[4] == map[6] && map[2] == x && map[4] == x && map[6] == x)
             {
                 return true;
             }
@@ -99,67 +98,81 @@ namespace xo
 
             return false;
         }
+        public static bool checkEnd(char[ ]map)
+        {
+            //Determining end of game
+            if (IsWin(map))
+            {
+                Console.Clear();
+                Console.WriteLine("First Player Won !!!\n");
+                PrintMap(map);
+                return true;
+            }
+            if (IsLose(map))
+            {
+                Console.Clear();
+                Console.WriteLine("Second Player Won !!!\n");
+                PrintMap(map);
+                return true;
+            }
+            if (!IsLose(map) && !IsWin(map) && mapIsFull(map))
+            {
+                Console.Clear();
+                Console.WriteLine("Draw\n");
+                PrintMap(map);
+                return true;
+            }
+            return false;
+        }
         static void Main()
         {  
-            char[] map = new char[9];
-            Random rnd = new Random();
+            char[] map = new char[9]; 
             bool isfull = mapIsFull(map);
             //the loop for the repeating the movenent by user
             do
             {    
-                Console.Clear();
+                Console.Clear(); 
                 //Print on array
-                if (!isfull)
+                if ( !checkEnd(map))
                 {
                    PrintMap(map);
                 }
-                 
-             ReInput: 
-                //appropriation the 'x' in the map 
-                Console.WriteLine("\nInput the digit : ");
-                if (!isfull&int.TryParse(Console.ReadLine(),out int input))
+                else if (checkEnd(map))
                 {
-                    map[input] = x;
+                    break;
+                } 
+                ReInput:
+                //appropriation the 'x', is first player
+                Console.WriteLine("First Player Put ur X");
+                if (  !isfull&int.TryParse(Console.ReadLine(),out int FirstPlayer) && map[FirstPlayer] != x & map[FirstPlayer] != o)
+                {
+                    map[FirstPlayer] = x;
                     Console.Clear() ;
                     PrintMap (map);
                 }
-                else   
+                else if (!mapIsFull(map))
                 {
                     Console.WriteLine("it must be an digit!!!");
                     goto ReInput;
                 } 
-                 ReRandom:
-                
+                ReRandom:
+                if (checkEnd(map))
+                {
+                    break;
+                }
                 //appropriation value that will be the index of 'o'
-                int random = rnd.Next(9); 
-                    if (   map[random] != x& map[random] != o)
+                Console.WriteLine("Second Player Put ur 0");
+                if (  !isfull&&int.TryParse(Console.ReadLine(), out int SecondPlayer)&&  map[SecondPlayer] != x& map[SecondPlayer] != o  )
                     {
-                        map[random] = o;
+                        map[SecondPlayer] = o;
                     }
                     else if(!mapIsFull(map)) 
                     {
+                        Console.WriteLine("it must be an digit!!!");
                         goto ReRandom;
-                    }   
-                Console.Clear();
-                //Determining end of game
-                if (IsWin(map))
-                {
-                    Console.WriteLine("Win !!!\n");
-                    PrintMap(map);
-                    break;
-                } 
-                if (IsLose(map))
-                {
-                    Console.WriteLine("Lose (((\n");
-                    PrintMap(map);
-                    break;
-                }
-                if (!IsLose(map)&&!IsWin(map)&&mapIsFull(map))
-                {
-                    Console.WriteLine("Draw\n");
-                    PrintMap(map);
-                    break;
-                }
+                    }
+                 
+                Console.Clear(); 
             } while (!mapIsFull(map));
              
         }

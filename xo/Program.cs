@@ -98,7 +98,7 @@ namespace xo
 
             return false;
         }
-        public static bool checkEnd(char[ ]map)
+        public static bool IsEnd(char[ ]map)
         {
             //Determining end of game
             if (IsWin(map))
@@ -127,53 +127,53 @@ namespace xo
         static void Main()
         {  
             char[] map = new char[9]; 
-            bool isfull = mapIsFull(map);
+             
             //the loop for the repeating the movenent by user
             do
             {    
                 Console.Clear(); 
                 //Print on array
-                if ( !checkEnd(map))
+                if ( !IsEnd(map))
                 {
                    PrintMap(map);
                 }
-                else if (checkEnd(map))
+                else if (IsEnd(map))
                 {
                     break;
                 } 
                 ReInput:
                 //appropriation the 'x', is first player
                 Console.WriteLine("First Player Put ur X");
-                if (  !isfull&int.TryParse(Console.ReadLine(),out int FirstPlayer) && map[FirstPlayer] != x & map[FirstPlayer] != o)
+                if (   int.TryParse(Console.ReadLine(),out int FirstPlayer) && map[FirstPlayer] != x & map[FirstPlayer] != o)
                 {
                     map[FirstPlayer] = x;
                     Console.Clear() ;
                     PrintMap (map);
                 }
-                else if (!mapIsFull(map))
+                else if (!IsEnd(map))
                 {
                     Console.WriteLine("it must be an digit!!!");
                     goto ReInput;
                 } 
                 ReRandom:
-                if (checkEnd(map))
+                if (IsEnd(map))
                 {
                     break;
                 }
                 //appropriation value that will be the index of 'o'
                 Console.WriteLine("Second Player Put ur 0");
-                if (  !isfull&&int.TryParse(Console.ReadLine(), out int SecondPlayer)&&  map[SecondPlayer] != x& map[SecondPlayer] != o  )
+                if (int.TryParse(Console.ReadLine(), out int SecondPlayer)&&  map[SecondPlayer] != x& map[SecondPlayer] != o  )
                     {
                         map[SecondPlayer] = o;
                     }
-                    else if(!mapIsFull(map)) 
+                    else if(!IsEnd(map)) 
                     {
                         Console.WriteLine("it must be an digit!!!");
                         goto ReRandom;
                     }
                  
                 Console.Clear(); 
-            } while (!mapIsFull(map));
+            } while (!IsEnd(map));
              
         }
            

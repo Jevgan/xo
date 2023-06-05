@@ -10,13 +10,9 @@ namespace xo
          
         public static bool mapIsFull(char[] arr)
         {
-            for (int i = 0; i < arr.Length; i++)
-            {
-                if ( arr[i]=='\0'  &arr[i] !=x & arr[i] != o )
-                {
-                    return false;
-                }
-            }
+            for (int i = 0; i < arr.Length; i++) 
+                if ( arr[i]=='\0'  &arr[i] !=x & arr[i] != o ) 
+                    return false; 
             return true;
         } 
         static void PrintMap(char[]map)
@@ -25,10 +21,8 @@ namespace xo
             for (int i = 0; i < 9; i += 3)
             {
                 Console.Write("| ");
-                for (int j = 0; j < 3; j++)
-                {
-                    Console.Write(map[i + j] + " | ");
-                }
+                for (int j = 0; j < 3; j++) 
+                    Console.Write(map[i + j] + " | "); 
                 Console.WriteLine("\n-------------");
             }
         }
@@ -68,33 +62,22 @@ namespace xo
         public static bool IsLose(char[]map)
         {
             // Check rows
-            for (int i = 0; i < 9; i += 3)
-            {
+            for (int i = 0; i < 9; i += 3) 
                 if (map[i] != '-' && map[i] == map[i + 1] && map[i + 1] == map[i + 2] && map[i] == o && map[i + 1] == o && map[i + 2] == o)
-                {
-                    return true;
-                }
-            }
+                    return true;  
 
             // Check columns
             for (int i = 0; i < 3; i++)
-            {
-                if (   map[i] != '-' && map[i] == map[i + 3] && map[i + 3] == map[i + 6] && map[i] == o && map[i + 3] == o && map[i + 6] == o)
-                {
-                    return true;
-                }
-            }
+             
+                if (map[i] != '-' && map[i] == map[i + 3] && map[i + 3] == map[i + 6] && map[i] == o && map[i + 3] == o && map[i + 6] == o)
+                    return true; 
 
             // Check diagonals
-            if (map[0] != '-' && map[0] == map[4] && map[4] == map[8] && map[0] == o && map[4] == o && map[8] == o)
-            {
-                return true;
-            }
+            if (map[0] != '-' && map[0] == map[4] && map[4] == map[8] && map[0] == o && map[4] == o && map[8] == o)             
+                return true; 
 
-            if (map[2] != '-' && map[2] == map[4] && map[4] == map[6] && map[2] == o && map[4] == o && map[6] == o)
-            {
-                return true;
-            }
+            if (map[2] != '-' && map[2] == map[4] && map[4] == map[6] && map[2] == o && map[4] == o && map[6] == o)    
+                return true; 
 
             return false;
         }
@@ -126,25 +109,25 @@ namespace xo
         }
         static void Main()
         {  
-            char[] map = new char[9]; 
-             
+            char[] map = new char[9];  
+
             //the loop for the repeating the movenent by user
             do
             {    
                 Console.Clear(); 
+
                 //Print on array
-                if ( !IsEnd(map))
-                {
+                if ( !IsEnd(map)) 
                    PrintMap(map);
-                }
-                else if (IsEnd(map))
-                {
+                 
+                else if (IsEnd(map)) 
                     break;
-                } 
+                 
                 ReInput:
                 //appropriation the 'x', is first player
                 Console.WriteLine("First Player Put ur X");
-                if (   int.TryParse(Console.ReadLine(),out int FirstPlayer) && map[FirstPlayer] != x & map[FirstPlayer] != o)
+
+                if (int.TryParse(Console.ReadLine(),out int FirstPlayer) && map[FirstPlayer] != x & map[FirstPlayer] != o)
                 {
                     map[FirstPlayer] = x;
                     Console.Clear() ;
@@ -156,27 +139,21 @@ namespace xo
                     goto ReInput;
                 } 
                 ReRandom:
-                if (IsEnd(map))
-                {
+                if (IsEnd(map)) 
                     break;
-                }
+                 
                 //appropriation value that will be the index of 'o'
                 Console.WriteLine("Second Player Put ur 0");
                 if (int.TryParse(Console.ReadLine(), out int SecondPlayer)&&  map[SecondPlayer] != x& map[SecondPlayer] != o  )
-                    {
                         map[SecondPlayer] = o;
-                    }
+                     
                     else if(!IsEnd(map)) 
                     {
                         Console.WriteLine("it must be an digit!!!");
                         goto ReRandom;
-                    }
-                 
+                    } 
                 Console.Clear(); 
-            } while (!IsEnd(map));
-             
-        }
-           
-
+            } while (!IsEnd(map)); 
+        } 
     }
 }

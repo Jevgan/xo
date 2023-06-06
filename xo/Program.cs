@@ -10,8 +10,8 @@ namespace xo
          
         public static bool mapIsFull(char[] arr)
         {
-            for (int i = 0; i < arr.Length; i++) 
-                if ( arr[i]=='\0'  &arr[i] !=x & arr[i] != o ) 
+            for (int i = 1; i < arr.Length; i++) 
+                if ( arr[i]=='\0') 
                     return false; 
             return true;
         } 
@@ -29,56 +29,35 @@ namespace xo
         public static bool IsWin(char[] map)
         { 
             // Check rows
-            for (int i = 0; i < 9; i += 3)
-            {
-                if (  map[i] != '-' && map[i] == map[i + 1] && map[i + 1] == map[i + 2] && map[i] == x && map[i + 1] == x && map[i + 2] == x)
-                {
-                    return true;
-                }
-            }
-
+            for (int i = 1; i < 10; i += 3) 
+                if ( map[i] == map[i + 1] && map[i + 1] == map[i + 2] && map[i] == x && map[i + 1] == x && map[i + 2] == x) 
+                    return true; 
             // Check columns
-            for (int i = 0; i < 3; i++)
-            {
-                if (map[i] == x  && map[i] == map[i + 3] && map[i + 3] == map[i + 6] && map[i+3] == x && map[i+6] == x)
-                {
-                    return true;
-                }
-            }
-
+            for (int i = 0; i < 3; i++) 
+                if (map[i] == map[i + 3] && map[i + 3] == map[i + 6] && map[i+3] == x && map[i+6] == x) 
+                    return true;  
             // Check diagonals
-            if (map[0] == map[4] && map[4] == map[8] && map[0]==x && map[4] == x && map[8] == x)
-            {
-                return true;
-            }
-
-            if (map[2] == map[4] && map[4] == map[6] && map[2] == x && map[4] == x && map[6] == x)
-            {
-                return true;
-            }
-
+            if (map[1] == map[5] && map[7] == map[9] && map[1]==x && map[5] == x && map[9] == x) 
+                return true; 
+            if (map[3] == map[5] && map[5] == map[7] && map[3] == x && map[5] == x && map[7] == x) 
+                return true; 
             return false;
         }
         public static bool IsLose(char[]map)
         {
             // Check rows
             for (int i = 0; i < 9; i += 3) 
-                if (map[i] != '-' && map[i] == map[i + 1] && map[i + 1] == map[i + 2] && map[i] == o && map[i + 1] == o && map[i + 2] == o)
-                    return true;  
-
+                if (  map[i+1] == map[i + 2] && map[i + 2] == map[i + 3] && map[i+1] == o && map[i + 2] == o && map[i + 3] == o)
+                    return true;   
             // Check columns
-            for (int i = 0; i < 3; i++)
-             
-                if (map[i] != '-' && map[i] == map[i + 3] && map[i + 3] == map[i + 6] && map[i] == o && map[i + 3] == o && map[i + 6] == o)
-                    return true; 
-
+            for (int i = 0; i < 3; i++) 
+                if (  map[i+1] == map[i + 4] && map[i + 4] == map[i + 7] && map[i+1] == o && map[i + 4] == o && map[i + 7] == o)
+                    return true;  
             // Check diagonals
-            if (map[0] != '-' && map[0] == map[4] && map[4] == map[8] && map[0] == o && map[4] == o && map[8] == o)             
-                return true; 
-
-            if (map[2] != '-' && map[2] == map[4] && map[4] == map[6] && map[2] == o && map[4] == o && map[6] == o)    
-                return true; 
-
+            if (map[1] == map[5] && map[5] == map[9] && map[1] == o && map[5] == o && map[9] == o)             
+                return true;  
+            if (map[3] == map[5] && map[5] == map[7] && map[3] == o && map[5] == o && map[7] == o)    
+                return true;  
             return false;
         }
         public static bool IsEnd(char[ ]map)
@@ -109,7 +88,7 @@ namespace xo
         }
         static void Main()
         {  
-            char[] map = new char[9];  
+            char[] map = new char[10];  
 
             //the loop for the repeating the movenent by user
             do
@@ -118,8 +97,7 @@ namespace xo
 
                 //Print on array
                 if ( !IsEnd(map)) 
-                   PrintMap(map);
-                 
+                   PrintMap(map); 
                 else if (IsEnd(map)) 
                     break;
                  
@@ -127,9 +105,9 @@ namespace xo
                 //appropriation the 'x', is first player
                 Console.WriteLine("First Player Put ur X");
 
-                if (int.TryParse(Console.ReadLine(),out int FirstPlayer) && map[FirstPlayer] != x & map[FirstPlayer] != o)
+                if (int.TryParse(Console.ReadLine(),out int FirstPlayer) && map[FirstPlayer-1] != x & map[FirstPlayer - 1] != o)
                 {
-                    map[FirstPlayer] = x;
+                    map[FirstPlayer-1] = x;
                     Console.Clear() ;
                     PrintMap (map);
                 }
@@ -144,8 +122,8 @@ namespace xo
                  
                 //appropriation value that will be the index of 'o'
                 Console.WriteLine("Second Player Put ur 0");
-                if (int.TryParse(Console.ReadLine(), out int SecondPlayer)&&  map[SecondPlayer] != x& map[SecondPlayer] != o  )
-                        map[SecondPlayer] = o;
+                if (int.TryParse(Console.ReadLine(), out int SecondPlayer)&&  map[SecondPlayer - 1] != x& map[SecondPlayer-1] != o  )
+                        map[SecondPlayer-1] = o;
                      
                     else if(!IsEnd(map)) 
                     {
